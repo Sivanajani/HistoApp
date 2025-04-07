@@ -1,0 +1,33 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Node.js und Vite
+node_modules
+dist
+dist-ssr
+.vite
+.cache
+
+# Falls du Umgebungsvariablen verwendest:
+.env
+.env.local
+
+# Sicherstellen, dass package-lock.json NICHT ignoriert wird!
+!package-lock.json
+
+# Editor und Systemdateien
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+.ntvs
+*.njsproj
+*.sln
+*.sw?

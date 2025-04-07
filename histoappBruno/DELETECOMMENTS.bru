@@ -1,0 +1,16 @@
+meta {
+  name: DELETECOMMENTS
+  type: http
+  seq: 10
+}
+
+delete {
+  url: http://localhost:8080/v1/comments/remove/1
+  body: none
+  auth: none
+}
+
+body:json {
+  { "context": "test2" }
+  
+}

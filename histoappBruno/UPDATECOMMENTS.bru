@@ -1,0 +1,16 @@
+meta {
+  name: UPDATECOMMENTS
+  type: http
+  seq: 9
+}
+
+put {
+  url: http://localhost:8080/v1/comments/update/1
+  body: json
+  auth: none
+}
+
+body:json {
+  { "context": "test2" }
+  
+}

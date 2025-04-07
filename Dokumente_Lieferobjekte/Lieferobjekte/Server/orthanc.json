@@ -1,0 +1,50 @@
+{
+    "Name": "MyPACS",
+    "RemoteAccessAllowed": true,
+    "StorageCompression": false,
+    "TcpNoDelay": true,
+    "KeepAlive": true,
+  
+    "PostgreSQL": {
+      "EnableIndex": true,
+      "EnableStorage": true,
+      "IndexConnectionsCount": 20,
+      "Host": "postgres",
+      "Port": 5432,
+      "Database": "orthanc",
+      "Username": "Username",
+      "Password": "Password",
+      "EnableSsl": false,
+      "MaximumConnectionRetries": 10,
+      "ConnectionRetryInterval": 5,
+      "TransactionMode": "ReadCommitted",
+      "EnableVerboseLogs": false
+    },
+  
+    "AuthenticationEnabled": true,
+    "RegisteredUsers": {
+      "orthanc": "orthanc"
+    },
+  
+    "DicomAet": "ORTHANC",
+    "DicomPort": 4242,
+    "HttpPort": 8042,
+  
+  
+    "DicomWeb": {
+      "Enable": true,
+      "Root": "/dicom-web",
+      "EnableWado": true
+    },
+  
+  
+    "HttpServerEnabled": true,
+    "HttpCompressionEnabled": true,
+    "HttpVerbose": true,
+    "CorsEnabled": true,
+  
+  
+    "Plugins" : [
+      "/usr/share/orthanc/plugins/libOrthancImageJ.so"
+    ]
+  }

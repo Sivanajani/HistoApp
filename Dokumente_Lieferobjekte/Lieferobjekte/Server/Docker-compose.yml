@@ -1,0 +1,175 @@
+services:
+  apache:
+    build: ./apache-config
+    container_name: apache_server
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./apache-config/html:/usr/local/apache2/htdocs
+      - ./apache-config/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./apache-config/mime.types:/usr/local/apache2/conf/mime.types
+      - ./apache-config/sites:/usr/local/apache2/conf/sites
+      - ./apache-config/logs:/usr/local/apache2/logs
+      - ./certs:/etc/letsencrypt
+    depends_on:
+      my-histo-app:
+        condition: service_healthy
+    networks:
+      - web
+
+  my-histo-app:
+    image: node:18
+    container_name: my-histo-app
+    networks:
+      - web
+    restart: always
+    working_dir: /app
+    volumes:
+      - ./app:/app
+    ports:
+      - "3100:3100"
+    command: ["npm", "run", "preview", "--", "--port","3100"]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3100"]
+      interval: 30s
+      timeout: 10s
+      retries: 2
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - ./certs:/etc/letsencrypt
+      - ./certbot-config:/var/lib/letsencrypt
+    depends_on:
+      - apache
+
+  server-api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: server-api
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    networks:
+      - web
+    environment:
+      - JAVA_TOOL_OPTIONS=-Xmx2048m
+
+  postgres:
+    container_name: postgres
+    image: postgres:15
+    restart: always
+    environment:
+      - POSTGRES_USER=POSTGRES_USER
+      - POSTGRES_PASSWORD=POSTGRES_PASSWORD
+      - POSTGRES_DB=orthanc
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - web
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U orthanc"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  orthanc:
+    container_name: orthanc
+    image: orthancteam/orthanc:22.6.1
+    restart: always
+    volumes:
+      - ./orthanc-config/orthanc.json:/etc/orthanc/orthanc.json
+      - orthanc-storage:/var/lib/orthanc/db
+    ports:
+      - 4242:4242
+      - 8042:8042
+    environment:
+      ORTHANC_NAME: HelloWorld
+      ORTHANC_POSTGRESQL_PLUGIN_ENABLED: true
+      ORTHANC__POSTGRESQL__ENABLEINDEX: true
+      ORTHANC__POSTGRESQL__ENABLESTORAGE: true
+      ORTHANC__POSTGRESQL__HOST: postgres
+      ORTHANC__POSTGRESQL__PORT: 5432
+      ORTHANC__POSTGRESQL__USERNAME: ORTHANC__POSTGRESQL__USERNAME
+      ORTHANC__POSTGRESQL__PASSWORD: ORTHANC__POSTGRESQL__PASSWORD
+      ORTHANC__POSTGRESQL__DATABASE: orthanc
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - web
+
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: grafana
+    ports:
+      - '3000:3000'
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./monitoring/grafana.ini:/etc/grafana/grafana.ini
+      - ./monitoring/grafana.yml:/etc/grafana/provisioning/datasources/grafana.yml
+    restart: unless-stopped
+    networks:
+      - web
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--web.external-url=/prometheus/'
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    restart: unless-stopped
+    networks:
+      - web
+
+  node_exporter:
+    image: prom/node-exporter
+    container_name: node_exporter
+    ports:
+      - "9100:9100"
+    networks:
+      - web
+    restart: unless-stopped
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.47.0
+    container_name: cadvisor
+    command:
+      - "-port=8098"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    devices:
+      - /dev/kmsg
+    privileged: true
+    restart: unless-stopped
+    networks:
+      - web
+
+
+volumes:
+  postgres-data:
+  orthanc-storage:
+  prometheus-data:
+  grafana-data:
+
+
+networks:
+  web:
+    driver: bridge

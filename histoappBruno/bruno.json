@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "histoappBruno copy",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

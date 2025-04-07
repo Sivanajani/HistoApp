@@ -1,0 +1,20 @@
+meta {
+  name: OrthancGet8042_2
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:8042/studies?expand
+  body: none
+  auth: basic
+}
+
+params:query {
+  expand: 
+}
+
+auth:basic {
+  username: orthanc
+  password: orthanc
+}

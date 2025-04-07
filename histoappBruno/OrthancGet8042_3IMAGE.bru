@@ -1,0 +1,20 @@
+meta {
+  name: OrthancGet8042_3IMAGE
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:8042/instances?expand
+  body: none
+  auth: basic
+}
+
+params:query {
+  expand: 
+}
+
+auth:basic {
+  username: orthanc
+  password: orthanc
+}
