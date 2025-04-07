@@ -3,7 +3,7 @@
 🎓 *Spitalprojekt im Studiengang Medizininformatik (B.Sc.) an der FHNW*
 
 **HistoApp** ist eine webbasierte Anwendung zur Anzeige, Verwaltung, Annotation und Kommentierung von Bildern histologischer Gewebeproben.  
-Sie wurde im Rahmen eines Hochschulprojekts entwickelt und kombiniert moderne Webtechnologien mit medizinischer Bildverarbeitung.
+Sie wurde im Rahmen eines Hochschulprojekts entwickelt.
 
 ---
 
