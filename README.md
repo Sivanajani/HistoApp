@@ -1,52 +1,42 @@
-# 🧬 HistoApp – Webapplikation zur Verwaltung histologischer Gewebeproben
+# 🧬 HistoApp – Web Application for Managing Histological Tissue Samples
 
-🎓 *Spitalprojekt im Studiengang Medizininformatik (B.Sc.) an der FHNW*
+🎓 *Hospital project as part of the B.Sc. Medical Informatics program at FHNW*
 
-**HistoApp** ist eine webbasierte Anwendung zur Anzeige, Verwaltung, Annotation und Kommentierung von Bildern histologischer Gewebeproben.  
-Sie wurde im Rahmen eines Hochschulprojekts entwickelt.
+**HistoApp** is a web-based application for viewing, managing, annotating, and commenting on images of histological tissue samples. It was developed as part of a university project.
 
 ---
 
 ## 🔧 Tech Stack
 
 - **Frontend:** React · TypeScript · Vite · Material UI · Axios · React Router  
-→ Quellcode: [`/my-histo-app/frontend`](./my-histo-app/frontend)
+→ Source code: [`/my-histo-app/frontend`](./my-histo-app/frontend)
 - **Backend:** Spring Boot · Kotlin · RESTful API · Bruno (Test & Simulation)  
-→ Quellcode: [`/my-histo-app/backend/histoapp`](./my-histo-app/backend/histoapp)
-- **Datenbank:** H2 (Kommentare & Tags)  
-- **Containerisierung & Server:**  [Docker Compose](./Dokumente_Lieferobjekte/Lieferobjekte/Server/Docker-compose.yml) · Apache (Reverse Proxy)  
+→ Source code: [`/my-histo-app/backend/histoapp`](./my-histo-app/backend/histoapp)
+- **Database:** H2 (comments & tags)  
+- **Containerization & Server:**  [Docker Compose](./Dokumente_Lieferobjekte/Lieferobjekte/Server/Docker-compose.yml) · Apache (Reverse Proxy)  
 → Setup & Konfiguration: [`/Dokumente_Lieferobjekte/Lieferobjekte/Server`](./Dokumente_Lieferobjekte/Lieferobjekte/Server)
 - **Monitoring:** Prometheus · Grafana
 
 ---
 
-## 🧪 API-Tests mit Bruno
+## 🧪 API Testing with Bruno
 
-Für das Testen der REST-Schnittstellen wurde das Open-Source-Tool [Bruno](https://www.usebruno.com/) verwendet.  
-Die Testfälle befinden sich im Ordner [`/histoappBruno`](./histoappBruno) und beinhalten u.a:
-
-- `GETCOMMENTS.bru` – Abrufen von Kommentaren
-- `DELETECOMMENTS.bru` – Löschen eines Kommentars
-- `POSTTAGS.bru` – Erstellen neuer Tags
-- Weitere Testcases für Tags, Filter und Instanzen
-
-→  API-Test-Collection: [`/histoappBruno`](./histoappBruno)
-
+The open-source tool [Bruno](https://www.usebruno.com/) was used to test the REST APIs.  
+The test collection can be found in the folder [`/histoappBruno`](./histoappBruno).
 
 ---
 
 ## 📌 Features
 
-- 🖼️ Anzeige & Verwaltung von Gewebebildern (DICOM-Integration über Orthanc)  
-- 🏷️ Tagging- und Kommentarfunktion für einzelne Bildinstanzen  
-- 🔌 REST-Schnittstellen zur Datenverwaltung  
-- 📊 Monitoring der Systemleistung mit Prometheus & Grafana  
-- 🐳 Containerisierte Entwicklungs- & Produktionsumgebung (Docker)
+- 🖼️ Viewing tissue images (DICOM integration via Orthanc)  
+- 🏷️ Tagging and commenting on individual image instances  
+- 🔌 RESTful APIs for data interaction  
+- 📊 System monitoring with Prometheus & Grafana  
+- 🐳 Containerized development & production environment (Docker)
 
 ---
 ## 🎥 Demo-Video
-Du möchtest sehen, wie HistoApp in Aktion aussieht? 
-Dann klick hier und schau dir das kurze Demo-Video an:
+Curious to see HistoApp in action? Click the button below to watch a short demo video:
 
 [![HistoApp Demo](images/thumbnail.png)](https://drive.google.com/file/d/1ck4kPS_QL9IJsGNLmrquxj2YifsK9PO0/view?usp=drive_link)
 
@@ -56,43 +46,43 @@ Dann klick hier und schau dir das kurze Demo-Video an:
   </a>
 </p>
 
-> In diesem Video zeige ich die Funktionen der Anwendung:
+> The video demonstrates the following features:
 > - Login via Keycloak
-> - Bildanzeige & Navigation
-> - Sprachwechsel zwischen Deutsch, Französisch und Englisch
-> - Wechsel zwischen Light- und Darkmode 
-> - Farbbasierte Filterung von Bildern
-> - Detaillansicht mit Tagging & Kommentarfunktion
-> - Filterung nach Tags, Beschreibungen und Kommentaren
-> - Bilder-Download als ZIP-Archiv
+> - Image display & navigation
+> - Language switching (German, French, English)
+> - Light/Dark mode toggle 
+> - Color-based filtering
+> - Detail view with tagging & commenting
+> - Filtering by tags, descriptions & comments
+> - Download images as a ZIP archiv
 
-*(Falls der Button/Thumbnail nicht funktioniert, klicken Sie hier: [🎥 Hier geht’s zum Demo-Video (Google Drive)](https://drive.google.com/file/d/1ck4kPS_QL9IJsGNLmrquxj2YifsK9PO0/view?usp=drive_link))*
-
----
-
-## 📄 Dokumentation
-
-Im Ordner [`/Dokumente_Lieferobjekte`](./Dokumente_Lieferobjekte) befinden sich weitere Unterlagen zum Projekt:
-
-- Anforderungsdokumentation (Software Requirements Specification, Risikomanagement-Bericht)
-- Architektur (System, Software)
-- Server-Konfiguration & HTTPS Setup
-- Projektstruktur, Meilensteine, Team-Notizen
+*(If the button or thumbnail doesn't work, click here: [🎥 Watch demo video](https://drive.google.com/file/d/1ck4kPS_QL9IJsGNLmrquxj2YifsK9PO0/view?usp=drive_link))*
 
 ---
 
-## 🔄 DICOM-Konvertierung (Custom Converter)
+## 📄 Documentation
 
-Zur Integration von externen Bilddaten in das PACS-System wurde ein eigener **DICOM-Converter** entwickelt.  
-Damit können z. B. `.jpg`-Dateien inklusive Metadaten in **valide DICOM-Dateien** umgewandelt werden, die anschliessend über Orthanc ins System geladen werden.
+Additional project documents can be found in the folder [`/Dokumente_Lieferobjekte`](./Dokumente_Lieferobjekte):
+
+- Requirements specification (SRS), risk analysis report  
+- System & software architecture  
+- Server configuration & HTTPS setup  
+- Project structure, milestones, and team notes
+
+---
+
+## 🔄 DICOM Conversion (Custom Converter)
+
+A custom **DICOM converter** was developed to support the integration of external image data into the PACS system.  
+This allows `.jpg` files with metadata to be converted into **valid DICOM files**, which can then be uploaded to Orthanc.
 
 
-🗂️ Quellcode befindet sich im Ordner: [`/my-histo-app/dicomConverter`](./my-histo-app/backend/dicomConverter)
+🗂️ Source code: [`/my-histo-app/dicomConverter`](./my-histo-app/backend/dicomConverter)
 
 
 ---
-## 📄 Lizenz
+## 📄 License
 
-Dieses Projekt wurde im Rahmen eines Hochschulprojekts an der FHNW erstellt und dient ausschliesslich zu Demonstrations- und Lernzwecken.
+This project was developed as part of a university project at FHNW and is intended for demonstration and educational purposes only.
 
 ---

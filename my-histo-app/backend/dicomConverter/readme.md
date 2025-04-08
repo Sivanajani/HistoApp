@@ -1,21 +1,22 @@
-# Informationen zum DicomConverter
+# 🔄 DICOM Converter
 
-## Allgemeinen Infos
-Der DicomConverter wurde mit Hilfe von Python realisiert. Das Ziel ist es, einen Ordenr mit JPEG's mit Hilfe dieses Pythonscripts in einem Zielordner als Dicomefiles abzuspeichern. Aus dem Metadaten.xml werden noch Metadaten für die jeweiligen Bilder extrahiert.
+This utility converts `.jpg` images into **valid DICOM files** using metadata provided via external XML files (*allImageMetadata.xml*). It was developed as part of the HistoApp project to support the integration of non-DICOM images into a PACS system (Orthanc).
 
-## Interpreter
-Für das Testen des Converters wurde VisualStudiocode verwendet mit dem Pythoninterpreter Python 3.9.18.
-(Visual Studio Code: cmd+shift+P)
+---
 
-Bei Bedarf noch die Bibliothek herunterladen: 
+## ⚙️ Features
+
+- 📷 Convert `.jpg` files into `.dcm` format
+- 📄 Metadata extraction from `.xml`
+- 🔗 Generates unique SOPInstanceUIDs and Patient data
+
+---
+
+## 🚀 Usage
+1. Place the source `.jpg` files in the input/ directory `input_jpegs`.
+2. Provide metadata as `.xml` (*allImageMetadata.xml*) 
+3. Run the script:
 ```bash
-pip install pydicom
+python dicom_converter.py
 ```
-
-## Ablauf
-1. zu konvertierende JPEG Files in Ordner input_jpegs laden (oder Pfad im Script anpassen)
-2. aktuelle *allImageMetadata.xml* in Ordner dicomConverter laden (oder Pfad im Script anpassen)
-3. Python Skript *DicomConverter_neu.py* starten
-
--> Die neuen Dicomdateien werden im Ordner output_dicoms gespeichert (oder Pfad im Script anpassen)
-
+4. DICOM files will be saved in output/ folder.

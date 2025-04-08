@@ -1,43 +1,41 @@
-# My-Histo-App
+# HistoApp
+A web-based application for displaying, filtering, and managing medical images with tagging, commenting, and download functionality.
 
-Eine webbasierte Anwendung zur Anzeige, Filterung und Verwaltung medizinischer Bilder mit Tagging-, Kommentar- und Download-Funktion.
+## 🔐 Authentication
 
-## Authentifizierung
-
-Die Anwendung nutzt **Keycloak** zur Benutzer-Authentifizierung. Nur eingeloggte Benutzer können auf die App zugreifen.
+The application uses **Keycloak** for user authentication. Access is restricted to authenticated users only.
 
 - Realm: `FHNW-LST-MI`
 - Client: `g4-app`
-- Login wird beim Start automatisch erzwungen.
+- Login is enforced automatically on application start.
 
-## Hauptfunktionen
+## ✨ Key Features
 
-- **Filtern nach Tags** (inkl. AND/OR-Verknüpfung)
-- **Kommentare & Bildbeschreibungen** durchsuchen
-- **Farbbasierte Filterung** 
-- **ZIP-Download ausgewählter Bilder**
-- **Mehrsprachige Oberfläche** (DE / FR / EN)
-- **Dark-/Light-Mode** umschaltbar
+- **Tag-based filtering** with AND/OR logic
+- **Search** through comments and image descriptions
+- **Color-based filtering**
+- **ZIP download** of selected images
+- **Multilingual interface** (German / French / English)
+- **Toggleable Dark/Light mode**
 
-## Bildanzeige
+## 🖼️ Image Display
 
-Bilder werden direkt aus einem DICOM-kompatiblen Backend geladen (`https://v000564.fhnw.ch/orthanc/...`).
+Images are loaded directly from a DICOM-compatible backend: (`https://v000564.fhnw.ch/orthanc/...`).
 
-### Detailansicht
+### 🔍 Detail View
 
-- Zoom durch Klick auf das Bild
-- Tag-Hinzufügung/-Löschung
-- Kommentar CRUD (Erstellen, Bearbeiten, Löschen)
+- Click to zoom into image
+- Add or remove tags
+- Full **CRUD functionality for comments** (Create, Read, Update, Delete)
 
-## Setup & Start
+## ⚙️ Setup & Start
 
-### Voraussetzungen
+### Prerequisites
 
-- Node.js (empfohlen: ≥ 18)
-- Zugriff auf Keycloak + Bild-Backend (PACS-Server: Orthanc)
+- Node.js (recommended: ≥ v18)
+- Access to Keycloak + PACS backend (Orthanc)
 
-### Lokale Entwicklung starten
+### Start local development server
 
 ```bash
-npm install
 npm run dev
